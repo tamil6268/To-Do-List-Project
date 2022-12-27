@@ -1,0 +1,250 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 80vw;
+    height: 100vh;
+    background-color: black;
+}
+#body.active{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+   position: absolute;
+   top: 150px;
+   left: 100px;
+   
+}
+.nav{
+    color: white;
+    font-size: 45px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 50px;
+    left: 180px;
+}
+.nav .task{
+    font-weight: bold;
+}
+.nav .list{
+    font-weight: 100;
+    color: rgb(156, 153, 153);
+}
+.nav .additems i{
+    font-size: 30px;
+    color: blue;
+}
+#tbody{
+    color: rgb(156, 153, 153);
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 150px;
+    left: 180px;
+    display: inline;
+}
+/*To hide the content of no items*/
+#tbody.active{
+    display:none;
+}
+hr{
+    margin-top: 10px;
+}
+.additems{
+    width: 300px;
+    color: rgb(224, 218, 218);
+    font-size: x-large;
+    font-weight: 200;
+    position: absolute;
+    top: 11px;
+    left: 795px;
+}
+#parent{
+    display: none;
+    grid-template-columns: repeat(auto-fill,300px);
+    margin: 100px;
+    padding: 200px 200px;
+}
+#child{
+    width: 200px;
+    height: 300px;
+    background-color: beige;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    color: rgb(165, 161, 161);
+    text-align: center;
+    border-radius: 11px;
+    padding-top: 18px;
+    display: none;
+}
+#child.active{
+    display: inline-block;
+    position:relative;
+    top: 150px;
+    left: 160px;
+    margin: 30px;
+}
+#child .icon{
+    margin-top: 10px;
+    display: flex;
+    justify-content:flex-end;
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+}
+#child .icon i{
+    margin-left: 2px;
+    margin-right: 10px;
+    font-size: 35px;
+    color: blue;
+}
+#child .icon i:nth-child(1){
+    margin-left: 2px;
+    margin-right: 10px;
+    font-size: 35px;
+    color: tomato;
+}
+/*inside the box*/
+
+#inner{
+    width: 200px;
+    height: 180px;
+    /* background-color: greenyellow; */
+    flex-direction: column;
+    overflow:auto;
+    margin-top: 10px;
+    color: black;
+    display: flex;
+}
+#innertext{
+    visibility:hidden;
+}
+#innertext.active{
+    visibility: visible;
+}
+#inner button{
+    background-color: blue;
+    color: white;
+    border:1px solid blue;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 6px;
+    overflow: hidden;
+}
+#btnActive{
+    display: none;
+}
+#btnActive.click{
+    display: flex;
+}
+/*JS-direct appended elements*/
+
+#poptoadd{
+    /* background-color: rgba(150,150,150,0.5); */
+    backdrop-filter:blur(6px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: +10;
+}
+#poptoadd.active{
+    display:flex;
+}
+/*POP UP-BOX*/
+#popTab{
+    width: 370px;
+    height: 190px;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color:beige;
+    display: none;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    position: fixed;
+    top: 200px;
+    left: 460px;
+    z-index: +11;
+}
+#popTab.active{
+    display: flex;
+}
+#popTab .heading{
+    font-size: 30px;
+    color: tomato;
+}
+#popTab .inputbox input{
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 2px;
+}
+#popTab .btn button{
+      width: 80px;
+      height: 40px;
+      border-radius: 19px;
+      border: none;
+      background-color: tomato;
+      color: white;
+      font-size: 20px;
+      margin: 15px;
+}
+#popTab .btn button:hover{
+    color: white;
+    background-color: rgb(247, 79, 50);
+}
+/*POPUP-FOR-ITEMS*/
+#popTabForItem{
+    width: 370px;
+    height: 190px;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color:beige;
+    display: none;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    position: fixed;
+    top: 200px;
+    left: 460px;
+    z-index: +13;
+}
+#popTabForItem.active{
+    display: flex;
+}
+#popTabForItem .heading1{
+    font-size: 30px;
+    color: tomato;
+}
+#popTabForItem .inputbox1 input{
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 2px;
+}
+#popTabForItem #btn1 button{
+      width: 80px;
+      height: 40px;
+      border-radius: 19px;
+      border: none;
+      background-color: tomato;
+      color: white;
+      font-size: 20px;
+      margin: 15px;
+}
+#popTabForItem #btn1 button:hover{
+    color: white;
+    background-color: rgb(247, 79, 50);
+}
