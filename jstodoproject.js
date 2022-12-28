@@ -1,17 +1,12 @@
 const empty=document.getElementById('tbody');//for hide text
-
 //created the element for popup screen to add task
 const newScreen=document.createElement('div');
 newScreen.id='poptoadd';
 document.body.appendChild(newScreen);
-
 const popUpTab=document.getElementById('popTab');//for add task
-
 const add=document.getElementById('addplus');
 add.addEventListener('click',addTask);//by click it will blur the page
-
 // const addItem=document.getElementById('amAddIcon');
-
 function addTask(){
     newScreen.classList.add('active');
     //    empty.classList.add('active');//to hide the no items here front page
@@ -31,56 +26,96 @@ clickAdd[0].addEventListener('click',()=>{
     newCard();
 });
 const updateTask=[];
-
+console.log(updateTask);
 function newCard(){
     const userContent=document.getElementById('placename').value;//getting the text from user
-    
     const newobj={
         placeName: userContent,
     }
     updateTask.push(newobj); 
-    console.log(updateTask)
     popUpTab.classList.remove('active');
     newScreen.classList.remove('active'); 
-    addTaskToScreen();
+    const parent = document.createElement("div");//child element
+    parent.setAttribute("id","child");
+    //console.log(parent);
+    const title=document.createElement('div');//title
+    title.setAttribute("class","title");
+    //console.log(title);
+    const line=document.createElement('hr');
+    const inner=document.createElement('div');//for work show and markbutton
+    inner.setAttribute("id","inner");
+    // console.log(inner);
+    const innerText=document.createElement('div');
+    innerText.setAttribute("id","innertext");
+    // console.log(innerText);
+    const btnMarkDone=document.createElement('button');
+    btnMarkDone.setAttribute("class","btnActive");
+    btnMarkDone.innerText="Mark Done";
+    // console.log(btnMarkDone);
+    const icon=document.createElement('div');//for icons delete and add plus icon
+    icon.setAttribute("class","icon");
+    // console.log(icon);
+    const btnDelete=document.createElement('i');  
+    btnDelete.setAttribute("class","fa-solid fa-trash-can");  
+    btnDelete.setAttribute("id","amDeleteIcon");  
+    btnDelete.setAttribute("onclick","deleteTaskInsideItems()");
+    // console.log(btnDelete);
+    const btnAdd=document.createElement('i');  
+    btnAdd.setAttribute("class","fa-sharp fa-solid fa-circle-plus"); 
+    btnAdd.setAttribute("id","amAddIcon");
+    btnAdd.setAttribute("onclick","addTaskInsideItems()");
+    // console.log(btnAdd); 
+//appendingchild's toparent element
+    document.body.append(parent);
+    parent.appendChild(title);
+    parent.appendChild(line);
+    parent.appendChild(inner);
+    inner.appendChild(innerText);
+    inner.appendChild(btnMarkDone);
+    parent.appendChild(icon);
+    icon.appendChild(btnDelete);
+    icon.appendChild(btnAdd);   
+    parent.classList.add('active');
+    title.innerText=`${updateTask[updateTask.length-1].placeName}`;  
 }
-const addTaskToScreen = () => {
-    const element = document.createElement("div");
-    element.setAttribute("id","child");
-    document.body.append(element);
-    element.classList.add('active');
-    element.innerHTML = `
-            <div class="title">${updateTask[updateTask.length-1].placeName}</div><hr>
-            <div id="inner">
-                <div id="innertext">sleep </div><button id="btnActive">Mark Done</button>
-            </div>
-            <div class="icon">
-                <i id="amDeleteIcon"onclick="deleteTaskInsideItems()"class="fa-solid fa-trash-can"></i>
-                <i id="amAddIcon"onclick="addTaskInsideItems()"class="fa-sharp fa-solid fa-circle-plus"></i>
-                </div>`;
-    }  
 ////Entering to tasks and items
-    
+// const updateList=[];
 
-const btnDelete=document.getElementById('amDeleteIcon');
-btnDelete.setAttribute("onclick","deleteTaskInsideItems()");
-
-function deleteTaskInsideItems(){
-    alert("AM THE DELETE BTN")
-}
+updateTask.forEach(newContent => {
+    const newContent=()=>{
+        const userWork=document.getElementById('work').value;
+        const newobj1={
+            work:userWork,
+        }
+        updateTask.push(newobj1);
+        const inner=document.getElementById('inner');
+        const btnMarkDone=document.createElement('button');
+        btnMarkDone.setAttribute("id","btnActive");
+        const innerText=document.createElement('div');
+        innerText.setAttribute("id","innertext");
+        inner.appendChild(innerText);
+        innerText.classList.add('show');
+        innerText.innerHTML=`${updateTask[updateTask.length-1].work} <button id="btnActive">Mark Done</button>`;
+        const btnMark=document.getElementById('btnActive');
+        btnMark.addEventListener('click',(res)=>{
+                innerText.innerText=updateList[updateList.length-1].work;
+                innerText.style.color="brown";
+                innerText.style.fontWeight="none";
+                innerText.style.textDecoration="line-through";
+        })
+    }
+});
 const popUpTab1=document.getElementById('popTabForItem');
-const btnAdd=document.getElementById('amAddIcon');
-btnAdd.setAttribute("onclick","addTaskInsideItems()");
-
+function deleteTaskInsideItems(){
+        alert("Am the delete button")
+    }
 function addTaskInsideItems(){
     popTabForItem.classList.add('active');
     newScreen.classList.add('active');
     empty.classList.add('active');
 }
-
 const clickAddBtn=document.getElementsByClassName('btn11');
 const clickCloseBtn=document.getElementsByClassName('btn12');
-
 clickCloseBtn[0].addEventListener('click',()=>{
     popTabForItem.classList.remove('active');
     newScreen.classList.remove('active'); 
@@ -90,40 +125,5 @@ clickAddBtn[0].addEventListener('click',()=>{
     popTabForItem.classList.remove('active');
     newScreen.classList.remove('active');
     empty.classList.add('active');
-    
     newContent();
 });
-const updateList=[];
-
-const newContent=()=>{
-    const userWork=document.getElementById('work').value;
-    const newobj1={
-        work:userWork,
-    }
-    updateList.push(newobj1);
-    console.log(updateList)
-
-
-
-    const  taskBox=document.getElementById('child');
-    const inner=document.createElement('div');
-    inner.setAttribute("id","inner");
-    taskBox.appendChild(inner);
-    inner.classList.add('active');
-
-
-   taskBox.innerText= `${taskBox}`;
-   const markBtn=document.getElementById('btnActive');
-    markBtn.classList.add('click');
-}
-
-
-
-        // function markDone(){
-        //     const mark=document.querySelectorAll('.innertext');
-        //     mark[0].style.color="brown";
-        //     mark[0].style.textDecoration="line-through";
-            
-        //     const btn=document.querySelector('button');
-        //     btn.classList.add('btnActive');
-        // };
