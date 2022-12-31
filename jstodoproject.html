@@ -9,204 +9,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <i class="fa-sharp fa-solid fa-circle-plus"></i> -->
 </head>
-<body  id="body">
-    <section>
-        <thead>
-             <div class="nav">
-                <span class="task">Tasks</span>
-                <span class="list"> List</span>
-                <div class="additems"><i id="addplus"class="fa-sharp fa-solid fa-circle-plus"></i> Add Items</div>
-            </div>
-        </thead>
-        <tbody>
-             <div id="tbody">No Items in the Todo list</div>
-
-             <div class="parent">
-                <!-- <div id="child">
-                    <div class="title">Trip to Paris</div><hr>
-                    <div id="inner">
-                       <div id="innertext">sleep</div>
-                    </div>
-                    <div class="icon">
-                        <i id="amDeleteIcon"class="fa-solid fa-trash-can"></i>
-                        <i id="amAddIcon"class="fa-sharp fa-solid fa-circle-plus"></i>
-                    </div>
-                </div> -->
-        <!--add New Task -->   
-                <div id="popTab">
-                    <div class="heading">Add New List</div>
-                    <div class="inputbox">
-                        <label for="placename"></label>
-                        <input type="text" id="placename" value="">
-                    </div>
-                    <div class="btn">
-                        <button class="btn1">Add</button>
-                        <button class="btn2">Close</button>
-                    </div>                    
-                </div>
-
-        <!--add New Items -->
-                <div id="popTabForItem">
-                    <div class="heading1">Add New Items</div>
-                    <div class="inputbox1">
-                        <label for="work"></label>
-                        <input type="text" id="work" value="">
-                    </div>
-                    <div id="btn1">
-                        <button class="btn11">Add</button>
-                        <button class="btn12">Close</button>
-                    </div>                    
-                </div>
-
-
-             </div>
-        </tbody>
-    </section>
-    
-    <script type="text/javascript">
-        const empty=document.getElementById('tbody');//for hide text
-
-//created the element for popup screen to add task
-const newScreen=document.createElement('div');
-newScreen.id='poptoadd';
-document.body.appendChild(newScreen);
-
-const popUpTab=document.getElementById('popTab');//for add task
-
-const add=document.getElementById('addplus');
-add.addEventListener('click',addTask);//by click it will blur the page
-
-// const addItem=document.getElementById('amAddIcon');
-
-function addTask(){
-    newScreen.classList.add('active');
-    //    empty.classList.add('active');//to hide the no items here front page
-    popUpTab.classList.add('active');
-}
-const clickAdd=document.getElementsByClassName('btn1');
-const clickClose=document.getElementsByClassName('btn2');
-clickClose[0].addEventListener('click',()=>{
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active');
-    empty.classList.add('active');//i want to use if condition here
-})
-clickAdd[0].addEventListener('click',()=>{
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active');
-    empty.classList.add('active');
-    newCard();
-});
-const updateTask=[];
-
-function newCard(){
-    const userContent=document.getElementById('placename').value;//getting the text from user
-    const newobj={
-        placeName: userContent,
-    }
-    updateTask.push(newobj); 
-    
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active'); 
-
-    const parent = document.createElement("div");//child element
-    parent.setAttribute("id","child");
-    //console.log(parent);
-    const title=document.createElement('div');//title
-    title.setAttribute("class","title");
-    //console.log(title);
-    const line=document.createElement('hr');
-    const inner=document.createElement('div');//for work show and markbutton
-    inner.setAttribute("id","inner");
-    // console.log(inner);
-    const innerText=document.createElement('div');
-    innerText.setAttribute("id","innertext");
-    // console.log(innerText);
-    const btnMarkDone=document.createElement('button');
-    btnMarkDone.setAttribute("class","btnActive");
-    btnMarkDone.innerText="Mark Done";
-    // console.log(btnMarkDone);
-    const icon=document.createElement('div');//for icons delete and add plus icon
-    icon.setAttribute("class","icon");
-    // console.log(icon);
-    const btnDelete=document.createElement('i');  
-    btnDelete.setAttribute("class","fa-solid fa-trash-can");  
-    btnDelete.setAttribute("id","amDeleteIcon");  
-    btnDelete.setAttribute("onclick","deleteTaskInsideItems()");
-    // console.log(btnDelete);
-    const btnAdd=document.createElement('i');  
-    btnAdd.setAttribute("class","fa-sharp fa-solid fa-circle-plus"); 
-    btnAdd.setAttribute("id","amAddIcon");
-    btnAdd.setAttribute("onclick","addTaskInsideItems()");
-    // console.log(btnAdd); 
-
-//appendingchild's toparent element
-    document.body.append(parent);
-    parent.appendChild(title);
-    parent.appendChild(line);
-    parent.appendChild(inner);
-    inner.appendChild(innerText);
-    inner.appendChild(btnMarkDone);
-    parent.appendChild(icon);
-    icon.appendChild(btnDelete);
-    icon.appendChild(btnAdd);   
-    parent.classList.add('active');
-
-    title.innerText=`${updateTask[updateTask.length-1].placeName}`;  
-}
-////Entering to tasks and items
-const updateList=[];
-
-const newContent=()=>{
-    const userWork=document.getElementById('work').value;
-    const newobj1={
-        work:userWork,
-    }
-    updateList.push(newobj1);
-    const inner=document.getElementById('inner');
-    
-    const btnMarkDone=document.createElement('button');
-    btnMarkDone.setAttribute("id","btnActive");
-    const innerText=document.createElement('div');
-    innerText.setAttribute("id","innertext");
-    inner.appendChild(innerText);
-    innerText.classList.add('show');
-    innerText.innerHTML=`${updateList[updateList.length-1].work} <button id="btnActive">Mark Done</button>`;
-
-    const btnMark=document.getElementById('btnActive');
-    btnMark.addEventListener('click',(res)=>{
-        if(res==innerText){
-            innerText.innerText=updateList[updateList.length-1].work;
-        }else{
-            innerText.innerText=updateList[updateList.length-1].work;
-            innerText.style.color="brown";
-            innerText.style.fontWeight="none";
-            innerText.style.textDecoration="line-through";
-        }
-    })
-}
-const popUpTab1=document.getElementById('popTabForItem');
-function deleteTaskInsideItems(){
-        alert("Am the delete button")
-    }
-function addTaskInsideItems(){
-    popTabForItem.classList.add('active');
-    newScreen.classList.add('active');
-    empty.classList.add('active');
-}
-const clickAddBtn=document.getElementsByClassName('btn11');
-const clickCloseBtn=document.getElementsByClassName('btn12');
-
-clickCloseBtn[0].addEventListener('click',()=>{
-    popTabForItem.classList.remove('active');
-    newScreen.classList.remove('active'); 
-    empty.classList.add('active');
-})
-clickAddBtn[0].addEventListener('click',()=>{
-    popTabForItem.classList.remove('active');
-    newScreen.classList.remove('active');
-    empty.classList.add('active');
-    newContent();
-});
-    </script>
+<body>
+    <div class="nav">
+        <span class="task">Tasks</span>
+        <span class="list"> List</span>
+        <div class="additems">
+          <i id="addplus" class="fa-sharp fa-solid fa-circle-plus"></i> 
+          Add Items</div>
+        <div id="tbody">No Items in the Todo list</div>
+      </div>
+  
+      <div id="popTab">
+        <div class="heading">Add New List</div>
+        <div id="addTodoListDiv">
+            <!-- <label for="placename"></label> -->
+            <input type="text" id="addTodoListInput" value="">
+        </div>
+        <div class="btn">
+            <button id="addTodoListButton" class="btn1">Add</button>
+            <button class="btn2">Close</button>
+        </div>                    
+      </div>
+  
+      <div id="popTabForItem">
+        <div class="heading1">Add New Items</div>
+        <div class="inputbox1"id="box">
+            <!-- <label for="work"></label> -->
+            <input type="text" id="work" value="">
+        </div>
+        <div id="btn1">
+            <button class="btn11">Add</button>
+            <button class="btn12">Close</button>
+        </div>                    
+    </div>
+    <div id="container"></div>
+    <script src="jstodoproject.js"></script>
 </body>
 </html>
