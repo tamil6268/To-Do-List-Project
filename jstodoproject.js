@@ -1,152 +1,157 @@
-const empty=document.getElementById('tbody');//for hide text
+const popup = document.querySelector("#addNewList");
+const defaultText = document.querySelector(".noTodo");
+const blur = document.querySelector(".blur");
 
-//created the element for popup screen to add task
-const newScreen=document.createElement('div');
-newScreen.id='poptoadd';
-document.body.appendChild(newScreen);
+const popupBtn = document.querySelector("#add-new-list");
+let inputpop1 = document.querySelector("#inputBoxList");
+let inputItem = document.querySelector("#inputBoxItem");
+let addNewItemPopUp = document.querySelector("#add-new-item-box");
 
-const popUpTab=document.getElementById('popTab');//for add task
+let addNewListBtn = document.querySelector(".add-new-list-btn");
+let addNewItemBtn = document.querySelector(".add-new-item-btn");
+let header = document.querySelector(".header");
 
-const add=document.getElementById('addplus');
-add.addEventListener('click',addTask);//by click it will blur the page
+let mainflexcontainer = document.querySelector(".boxes");
+let containerSingle = document.querySelector(".container");
+let triptoparis = document.querySelector(".triptoparis");
+let singlecardcontainer = document.querySelector(".singlecardcontainer");
 
-// const addItem=document.getElementById('amAddIcon');
+let listClose = document.getElementById("listClose");
 
-function addTask(){
-    newScreen.classList.add('active');
-    //    empty.classList.add('active');//to hide the no items here front page
-    popUpTab.classList.add('active');
-}
-var parent=document.getElementById('parent');
-const clickAdd=document.getElementsByClassName('btn1');
-const clickClose=document.getElementsByClassName('btn2');
-clickClose[0].addEventListener('click',()=>{
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active');
-    empty.classList.add('active');
-    if(parent.innerText==''){
-        empty.classList.remove('active');
-    }
-})
-clickAdd[0].addEventListener('click',()=>{
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active');
-    empty.classList.add('active');
-    newCard()
+popupBtn.addEventListener("click", () => {
+  popup.style.display = "block";
+  blur.style.filter = "blur(8px)";
+  defaultText.style.display = "none";
 });
-const updateTask=[];
 
-function newCard(){
-    const userContent=document.getElementById('placename').value;//getting the text from user
-    if(userContent==''){//while entering with out name in input it will popup
-        alert('Enter Your Task Name "BUDDY"');
-        popUpTab.classList.add('active');
-        newScreen.classList.add('active');
-        parent.removeChild(task);
-    }
-    const newobj={
-        id: Date.now(),
-        placeName: userContent,
-    }
-    updateTask.push(newobj); 
-    console.log(updateTask)
-    popUpTab.classList.remove('active');
-    newScreen.classList.remove('active'); 
-        addTaskToScreen();
+const closePopUp = document.querySelector(".close");
+closePopUp.addEventListener("click", () => {
+  popup.style.display = "none";
+  blur.style.filter = "none";
+});
+
+let array = [];
+
+function addCard(e) {
+  const cardName = inputpop1.value;
+  const cardObject = {
+    id: Date.now(),
+    name: cardName
+  };
+  array.push(cardObject);
+  inputpop1.value = "";
 }
-const addTaskToScreen = () => {
-    
-    const task = document.createElement("div");
-    task.setAttribute("id","child");
-    task.classList.add('active');
+let selectedCardId;
+function createCard() {
+  let card = document.createElement("div");
+  card.className = "box";
 
-    const title=document.createElement('div');
-    title.setAttribute("id","title")
-    title.innerText=updateTask[updateTask.length-1].placeName;
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    card.id = element.id;
+    card.innerHTML = `<i class="fas fa-trash-alt icon-style-22 display-none removeIcon"></i> <i class="icon-style-2 display-none fas fa-plus-circle plusbtn" data-card-id = "${card.id}"></i>`;
 
-    const hr=document.createElement('hr');
-    const parentHtml=document.getElementById('parent');
-    hr.setAttribute("id","hr");
-    const p=document.createElement('div');
-    p.setAttribute('id',"p");
+    mainflexcontainer.appendChild(card);
+    const heading = document.createElement("h1");
+    heading.style.fontSize = "22px";
+    heading.style.color = "brown";
+    heading.style.textTransform = "Capitalize";
+    heading.style.cursor = "pointer";
 
-    const deleteTask=document.createElement('h1');
-    deleteTask.setAttribute("id","delete");
-    deleteTask.innerText='O';
-    const addTask=document.createElement('h1');
-    addTask.setAttribute("id","add");
-    addTask.innerText='O';
+    heading.className = "headings subhead";
+    heading.id = element.id;
+    let createhr = document.createElement("hr");
+    createhr.style.width = "180px";
 
-    task.appendChild(title);
-    task.appendChild(hr);
-    parentHtml.appendChild(task);
-    task.appendChild(p);
-    let oneThing=document.createElement('div');
-    oneThing.setAttribute('id','oneThing');
-    task.appendChild(oneThing);
-//to delete the particular task
-    oneThing.appendChild(deleteTask).addEventListener('click',()=>{
-        parentHtml.removeChild(task);
-        if(parentHtml.innerText==''){
-            empty.classList.remove('active');
-        }//if there is no box is present it will work
-       });
-////Entering to tasks and items       
-    const popUpTab1=document.getElementById('popTabForItem');
-    oneThing.appendChild(addTask).addEventListener('click',()=>{
-            popUpTab1.classList.add('active');
-            newScreen.classList.add('active');
-            empty.classList.add('active');
-       });
-    const clickAddBtn=document.getElementsByClassName('btn11');
-    const clickCloseBtn=document.getElementsByClassName('btn12');
-    clickCloseBtn[0].addEventListener('click',()=>{
-        popUpTab1.classList.remove('active');
-        newScreen.classList.remove('active'); 
-        empty.classList.add('active');
-        if(parentHtml.innerText==''){
-            empty.classList.remove('active');
-        }
-       })
-    clickAddBtn[0].addEventListener('click',()=>{
-        popUpTab1.classList.remove('active');
-        newScreen.classList.remove('active');
-        empty.classList.add('active');
-        newWork();
-       });
-    //creating inner list:   
-    const updateList=[];
+    let cardsHeading = document.createTextNode(element.name);
+    heading.appendChild(cardsHeading);
+    card.appendChild(heading);
+    card.appendChild(createhr);
 
-    function newWork(){
-        const userText=document.getElementById('work').value;//getting the text from user
-        if(userText==''){
-            alert('Enter Your List Name "BUDDY" ');
-            popUpTab1.classList.add('active');
-            newScreen.classList.add('active');
-        }
-        const newobj1={
-            id: Date.now(),
-            placeVisit: userText,
-        }
-        console.log(newobj1)
-        updateList.push(newobj1);  
-        addListToCard();
+    const headingOpen = document.querySelectorAll(".headings");
+    headingOpen.forEach((e) => {
+      e.addEventListener("click", (e) => {
+        let selfDiv = e.target.parentNode;
+        let currentDiv = e.target;
+
+        triptoparis.innerText = currentDiv.innerText;
+        let singleCard = document.createElement("div");
+        singleCard.className = "single-card";
+        singleCard.className = "single-style";
+        singleCard.appendChild(selfDiv);
+        arraySingle.unshift(singleCard);
+
+        singlecardcontainer.appendChild(arraySingle[0]);
+        mainflexcontainer.style.display = "none";
+        header.style.display = "none";
+        containerSingle.style.display = "block";
+      });
+    });
+  }
+  const removeitem = document.querySelectorAll(".removeIcon");
+  removeitem.forEach((e) => {
+    e.addEventListener("click", (e) => {
+      let selfDiv = e.target.parentNode;
+      selfDiv.remove();
+    });
+  });
+  const plusBtnInCard = document.querySelectorAll(".plusbtn");
+  plusBtnInCard.forEach((e) => {
+    e.addEventListener("click", (e) => {
+      addNewItemPopUp.style.display = "block";
+      blur.style.filter = "blur(8px)";
+      selectedCardId = e.target.dataset.cardId;
+    });
+  });
+}
+let arraySingle = [];
+function backToMainList(e) {
+  mainflexcontainer.style.display = "flex";
+  arraySingle[0].classList.remove("single-style");
+  mainflexcontainer.appendChild(arraySingle[0]);
+  arraySingle = [];
+  header.style.display = "flex";
+  containerSingle.style.display = "none";
+}
+function addingDataIntoCard(temp) {
+  const data = inputItem.value;
+  const dataincard = document.createElement("p");
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (element.id == selectedCardId) {
+      console.log(data);
+      dataincard.innerHTML = data;
+      document.getElementById(`${element.id}`).appendChild(dataincard);
     }
-    const addListToCard=()=>{
-        // console.log(updateList)
-            if(updateTask.id==updateList.id){
-                if(p.innerText==''){
-                    p.innerText=updateList[updateList.length-1].placeVisit;
-                    p.addEventListener('click',()=>{
-                    p.style.color="brown";
-                    p.style.textDecoration="line-through";
-                })
-            }
-        }
-    }
- } 
-    // const newTab=document.createElement('div'); 
-    // newTab.setAttribute("id","newTab");
-    // console.log(newTab);
-    // document.body.append(newTab);
-    
+    inputItem.value = "";
+  }
+
+  dataincard.classList.add("tasklistitem");
+  const checkBox = document.querySelectorAll(".tasklistitem");
+  checkBox.forEach((e) => {
+    e.addEventListener("click", (e) => {
+      let selfDiv = e.target;
+      selfDiv.style.textDecoration = "line-through";
+      selfDiv.style.color = "red";
+    });
+    e.addEventListener("dblclick", (e) => {
+      let selfDiv = e.target;
+      selfDiv.style.display = "none";
+    });
+  });
+  blur.style.filter = "none";
+  addNewItemPopUp.style.display = "none";
+  mainflexcontainer.style.filter = "none";
+  selectedCardId = null;
+}
+addNewListBtn.addEventListener("click", () => {
+  addCard();
+  popup.style.display = "none";
+  blur.style.filter = "blur(0px)";
+  createCard();
+  inputItem.setAttribute("placeholder", "Enter an Item Name");
+});
+listClose.addEventListener("click", () => {
+  document.querySelector("#add-new-item-box").style.display = "none";
+  blur.style.filter = "none";
+});

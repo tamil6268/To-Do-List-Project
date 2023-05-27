@@ -1,68 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do-Project</title>
+    <title>Todo App Js</title>
     <link rel="stylesheet" href="jstodoproject.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <i class="fa-sharp fa-solid fa-circle-plus"></i> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
-<body  id="body">
-    <section>
-        <thead id="thead">
-             <div class="nav">
-                <span class="task">Tasks</span>
-                <span class="list"> List</span>
-                <div class="additems"><i id="addplus"class="fa-sharp fa-solid fa-circle-plus"></i> Add Items</div>
+
+<body>
+    <div class="blur" style="filter: none;">
+        <div class="header">
+            <span class="task">Tasks</span>
+            <span class="list"> List</span>
+            <div class="add-list "><i id="add-new-list" class="fas add-btn-js icon-style fa-plus-circle"></i> Add Items
             </div>
-        </thead>
-        <tbody>
-             <div id="tbody">No Items in the Todo list</div>
+        </div>
 
-             <div id="parent">
-                <!-- <div id="child">
-                    <div class="title">Trip to Paris</div><hr>
-                    <div id="inner">
-                       <div id="innertext">sleep </div><button id="btnActive">Mark Done</button>
-                    </div>
-                    <div class="icon">
-                        <i id="amDeleteIcon"class="fa-solid fa-trash-can"></i>
-                        <i id="amAddIcon"class="fa-sharp fa-solid fa-circle-plus"></i>
-                    </div> -->
-                </div>
-        <!--add New Task -->   
-                <div id="popTab">
-                    <div class="heading">Add New List</div>
-                    <div class="inputbox">
-                        <label for="placename"></label>
-                        <input type="text" id="placename" value="">
-                    </div>
-                    <div class="btn">
-                        <button class="btn1">Add</button>
-                        <button class="btn2">Close</button>
-                    </div>                    
-                </div>
+        <div class="container" style="display: none;">
+            <div class="trip-flex-mobile">
+                <div class="triptoparis">Trip</div>
+                <div class="back-opt"><i id="add-new-list" onclick="backToMainList(this)"
+                        class="fas backToMainList icon-style fa-arrow-circle-left"></i><span class="hide-them">
+                        Back</span> </div>
+            </div>
+        </div>
 
-        <!--add New Items -->
-                <div id="popTabForItem">
-                    <div class="heading1">Add New Items</div>
-                    <div class="inputbox1">
-                        <label for="work"></label>
-                        <input type="text" id="work" value="">
-                    </div>
-                    <div id="btn1">
-                        <button class="btn11">Add</button>
-                        <button class="btn12">Close</button>
-                    </div>                    
-                </div>
+        <div class="boxes"></div>
+        <div class="noTodo" id="empty">No Items in the Todo list...</div>
+        <div class="singlecardcontainer"></div>
+
+    </div>
+
+    <div id="addNewList" class="box-item-add" style="display: none;">
+        <div class="subheading">Add New Item</div>
+        <div class="newitem"><input type="text" name="new-item" id="inputBoxList" class="input-box"
+                placeholder="Add New Item"></div><br>
+        <div class="aiway"> <span id="add-btn" class="add-new-list-btn add-btn">Add</span><span
+                class="close add-btn">Close</span></div>
+    </div>
 
 
-             </div>
-        </tbody>
-    </section>
+    <div id="add-new-item-box" style="display: none;" class="box-item-add box-item-add2">
+        <div class="subheading">Add New List</div>
+        <div class="new-item-input"><input type="text" name="new-item" id="inputBoxItem" placeholder="Add New task"
+                class="input-box1"></div><br>
+        <div class="aiway"> <span id="addItem" onclick="addingDataIntoCard(this)" class="add-btn add-new-item-btn">
+                Add</span><span class="close add-btn" id="listClose">Close</span></div>
+    </div>
 
-    <script src="./jstodoproject.js" type="text/javascript"></script>
+    <div style="display: none;">
+        <div class="container">
+            <div class="trip-flex-mobile">
+                <div class="triptoparis before-after-line">Trip</div>
+                <div class="back-opt"><i class="fas icon-style fa-arrow-circle-left"></i><span class="hide-them">
+                        Back</span> </div>
+            </div>
+        </div>
+
+
+        <div class="box-main">
+            <h1 class="subhead"></h1>
+            <hr style="width: 70%; text-align: right; margin-right: 0;">
+            <h2 class="completed2"></h2>
+            <div class="checkbox"><input type="checkbox">
+                <h2 style="display: inline;"></h2>
+            </div>
+            <i id="show-addItem-box" class="fas icon-style-2 fa-plus-circle"> </i>
+        </div>
+    </div>
+    <script src="jstodoproject.js"></script>
 </body>
+
 </html>
